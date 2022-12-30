@@ -255,6 +255,12 @@
     top: 80px;
     font-size: 47px;
   }
+  .intro__logo {
+    font-size: 70px;
+  }
+  .intro__text {
+    font-size: 26px;
+  }
   .card__title {
     font-size: 26px;
   }

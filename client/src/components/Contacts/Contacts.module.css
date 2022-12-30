@@ -1,0 +1,25 @@
+.title {
+  font-family: "Oswald", sans-serif;
+  font-size: 26px;
+}
+
+.icons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icons a:not(:last-child) {
+  margin-right: 20px;
+}
+
+.icons img {
+  max-width: 40px;
+}
+
+@media (max-width: 600px) {
+  .title {
+    display: none;
+  }
+}

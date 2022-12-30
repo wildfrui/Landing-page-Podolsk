@@ -1,0 +1,41 @@
+.logo {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  color: #000;
+}
+
+.header {
+  font-size: 57px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home {
+  font-size: 120px;
+}
+
+@media (max-width: 1100px) {
+  .logo {
+    top: 80px;
+    font-size: 67px;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo {
+    top: 85px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    top: 70px;
+    font-size: 30px;
+  }
+  .home {
+    font-size: 40px;
+  }
+}

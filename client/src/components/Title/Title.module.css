@@ -1,0 +1,45 @@
+.title {
+  font-family: "Playfair Display", serif;
+  color: #000;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.stories {
+  font-size: 60px;
+  text-align: left;
+  width: 100%;
+  max-width: 1100px;
+}
+
+@media (max-width: 1100px) {
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .stories {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 780px) {
+  .title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stories {
+    margin-top: 70px;
+  }
+}
+
+@media (max-width: 400px) {
+  .title {
+    font-size: 16px;
+  }
+  .stories {
+    margin-top: 30px;
+  }
+}

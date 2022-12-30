@@ -1,0 +1,29 @@
+.header {
+  padding: 30px;
+}
+.header_solid {
+  background-color: silver;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: "Oswald", sans-serif;
+}
+
+@media (max-width: 600px) {
+  /* !!!!!!!!!!!!!!!!!!!!!!!*/
+  .header {
+    background: transparent;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    padding-top: 10px;
+  }
+}
