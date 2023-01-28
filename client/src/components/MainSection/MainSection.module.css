@@ -13,3 +13,7 @@
   align-items: center;
   flex-direction: column;
 }
+
+.stories {
+  margin-top: 20px;
+}

@@ -4,6 +4,10 @@
   text-decoration: none;
   color: #000;
 }
+.word {
+  color: #8d72e1;
+  font-style: italic;
+}
 
 .header {
   font-size: 57px;
