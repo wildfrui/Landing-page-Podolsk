@@ -1,0 +1,33 @@
+.container {
+  border-left: 2px solid rgb(0, 0, 0);
+  width: 320px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.title {
+  margin: 0;
+  font-family: Roboto;
+}
+
+.options {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.option {
+  width: 120px;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(155, 155, 155);
+  border-radius: 5px;
+  font-family: Roboto;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-align: center;
+}
