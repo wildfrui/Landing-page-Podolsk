@@ -1,5 +1,11 @@
+import { Options } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity('posts')
 export class PostEntity {
@@ -14,10 +20,38 @@ export class PostEntity {
   @Column()
   postTitle: string;
 
+  // @ApiProperty({
+  //   example: 'Гид по самому красивому месту Подмосковья',
+  //   description: 'Краткое описание статьи для превью',
+  // })
+  // @Column()
+  // postCategory: string;
+
   @ApiProperty({
     example: 'Гид по самому красивому месту Подмосковья',
     description: 'Краткое описание статьи для превью',
   })
   @Column()
   postDescription: string;
+
+  @ApiProperty({
+    example: '89',
+    description: 'Количество просмотров',
+  })
+  @Column({ type: 'integer', default: 0 })
+  views: string;
+
+  @ApiProperty({
+    example: 'Дата',
+    description: 'Дата создания поста',
+  })
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  // @ApiProperty({
+  //   example: 'image',
+  //   description: 'Превью',
+  // })
+  // @Column()
+  // postImage: string;
 }

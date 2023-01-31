@@ -1,3 +1,4 @@
+import { SearchPostDto } from './dto/search-post.dto';
 import { PostEntity } from './entities/post.entity';
 import {
   Controller,
@@ -7,11 +8,15 @@ import {
   Patch,
   Param,
   Delete,
+  UploadedFile,
+  UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('post-controller')
 @Controller('posts')
@@ -20,8 +25,12 @@ export class PostController {
 
   @ApiOperation({ summary: 'Cоздание поста' })
   @ApiResponse({ status: 200, type: PostEntity })
+  // @UseInterceptors(FileInterceptor('image'))
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
+  create(
+    @Body() createPostDto: CreatePostDto,
+    // @UploadedFile() image: Express.Multer.File,
+  ) {
     return this.postService.createPost(createPostDto);
   }
 
@@ -32,9 +41,14 @@ export class PostController {
     return this.postService.getAllPosts();
   }
 
-  @Get(':id')
-  getOne(@Param('id') id: string) {
-    return this.postService.getOnePost(+id);
+  // @Get(':id')
+  // getOne(@Param('id') id: string) {
+  //   return this.postService.getOnePost(+id);
+  // }
+
+  @Get('/search')
+  searchPost(@Query() SearchPostDto: SearchPostDto) {
+    return this.postService.searchPost(SearchPostDto);
   }
 
   // @Patch(':id')
@@ -42,8 +56,8 @@ export class PostController {
   //   return this.postService.update(+id, updatePostDto);
   // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.postService.remove(+id);
+  // }
 }
