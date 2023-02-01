@@ -29,10 +29,18 @@ export class PostService {
     return { posts, sum };
   }
 
-  // async getOnePost(id: number) {
-  //   const post = await this.postRepository.findOneBy({ id });
-  //   return post;
-  // }
+  async getOnePost(id: number) {
+    await this.postRepository
+      .createQueryBuilder()
+      .update()
+      .set({
+        views: () => 'views + 1',
+      })
+      .where('id = :id', { id })
+      .execute();
+    const post = await this.postRepository.findOneBy({ id });
+    return post;
+  }
 
   async searchPost(searchPostDto: SearchPostDto) {
     console.log(searchPostDto);

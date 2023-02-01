@@ -41,10 +41,10 @@ export class PostController {
     return this.postService.getAllPosts();
   }
 
-  // @Get(':id')
-  // getOne(@Param('id') id: string) {
-  //   return this.postService.getOnePost(+id);
-  // }
+  @Get(':id')
+  getOne(@Param('id') id: number) {
+    return this.postService.getOnePost(id);
+  }
 
   @Get('/search')
   searchPost(@Query() SearchPostDto: SearchPostDto) {
