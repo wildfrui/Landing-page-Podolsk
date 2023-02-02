@@ -1,0 +1,16 @@
+.container {
+  padding: 20px 0 10px;
+}
+
+.button {
+  height: 48px;
+  width: 100%;
+  padding: 0;
+  color: #fff;
+  border-radius: 8px;
+  background-color: #4683d9;
+  outline: none;
+  border: none;
+  font-family: Roboto;
+  cursor: pointer;
+}

@@ -17,9 +17,8 @@ const FormPaper = ({ children }: FormPaperI) => {
   return (
     <>
       <Paper classes={{ root: styles.background }}>
-        <Typography classes={{ root: styles.background__logo }}>
-          VP.RU
-        </Typography>
+        {/* <Typography classes={{ root: styles.background__logo }}>
+        </Typography> */}
       </Paper>
       <Paper classes={{ root: styles.container }}>{children}</Paper>
     </>

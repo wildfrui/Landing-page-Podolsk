@@ -15,7 +15,7 @@ import { FormType } from "enums/FormType";
 import { AuthFormI } from "interfaces/AuthFormI";
 import styles from "./Forms.module.css";
 
-const Register = () => {
+const Login = () => {
   return (
     <>
       <DialogContentText classes={cn(styles.title)}></DialogContentText>
@@ -35,14 +35,6 @@ const Register = () => {
         fullWidth
         variant="standard"
       />
-      {/* <TextField
-        margin="dense"
-        id="name"
-        label="Повторите пароль"
-        type="email"
-        fullWidth
-        variant="standard"
-      /> */}
       <div className={cn(styles.container)}>
         <button className={cn(styles.button)}>Войти</button>
       </div>
@@ -50,4 +42,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

@@ -36,6 +36,17 @@
   height: 30%;
 }
 
+.login {
+  cursor: pointer;
+  outline: none;
+  color: rgb(59, 165, 184);
+  background-color: transparent;
+  border: none;
+}
+.login:hover {
+  color: red;
+}
+
 .options {
   display: flex;
   flex-direction: column;

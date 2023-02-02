@@ -1,4 +1,6 @@
 export enum FormType {
-  MAIN = "main",
+  REGISTER = "register",
   LOGIN = "login",
+  EMAIL_REGISTER = "registeremail",
+  EMAIL_LOGIN = "loginemail",
 }
