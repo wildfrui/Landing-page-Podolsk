@@ -10,7 +10,9 @@
 }
 
 .background {
-  background-image: url(https://leonardo.osnova.io/e09fd210-816b-01d6-728d-dbf1ad64e29c/-/format/webp/);
+  background-image: url(https://images.unsplash.com/photo-1512850183-6d7990f42385?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80);
+  background-size: cover;
+  background-position: center;
   border-radius: 8px 0 0 8px !important;
   width: 250px;
   height: 660px;

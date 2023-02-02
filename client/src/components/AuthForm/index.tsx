@@ -21,6 +21,12 @@ import FormPaper from "./FormPaper";
 const AuthForm = ({ open, onClose }: AuthFormI) => {
   const [formType, setFormType] = useState<FormType>(FormType.REGISTER);
 
+  const conditions = {
+    login: formType === FormType.LOGIN || formType === FormType.EMAIL_LOGIN,
+    loginOrRegister:
+      formType === FormType.REGISTER || formType === FormType.LOGIN,
+  };
+
   const handleClose = () => {
     onClose();
   };
@@ -41,14 +47,12 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
       classes={{ paper: styles.container }}
     >
       <DialogTitle classes={{ root: styles.title }}>
-        {formType === FormType.LOGIN || formType === FormType.EMAIL_LOGIN
-          ? "Вход в аккаунт"
-          : "Регистрация"}
+        {conditions.login ? "Вход в аккаунт" : "Регистрация"}
       </DialogTitle>
       <DialogContent classes={{ root: styles.content }}>
         {formType === FormType.EMAIL_LOGIN && <Login></Login>}
         {formType === FormType.EMAIL_REGISTER && <Register></Register>}
-        {(formType === FormType.REGISTER || formType === FormType.LOGIN) && (
+        {conditions.loginOrRegister && (
           <div className={cn(styles.options)}>
             <Button
               classes={{ root: styles.option }}
@@ -62,7 +66,7 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
         )}
 
         <Typography>
-          {formType === FormType.LOGIN || formType === FormType.EMAIL_LOGIN ? (
+          {conditions.login ? (
             <>
               Нет аккаунта?
               <button
