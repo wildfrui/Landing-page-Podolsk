@@ -1,6 +1,14 @@
 .container {
   padding: 20px 0 10px;
+  margin: 0;
 }
+
+/* .form {
+  max-width: 335px;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center;
+} */
 
 .button {
   height: 48px;
@@ -13,4 +21,7 @@
   border: none;
   font-family: Roboto;
   cursor: pointer;
+}
+.field {
+  margin-bottom: 10px;
 }

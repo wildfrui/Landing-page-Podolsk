@@ -1,60 +1,75 @@
-import React, { useState } from "react";
+import React from "react";
 import cn from "classnames";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  TextField,
-  Typography,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { FormType } from "enums/FormType";
-import { AuthFormI } from "interfaces/AuthFormI";
-import { useForm } from "react-hook-form";
-import styles from "./Forms.module.css";
+import { DialogContentText, TextField } from "@mui/material";
 
-// interface RegisterFormI {
-//   email?: string;
-//   password?: string;
-// }
+import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import registerValidation from "utils/schemas/registerValidation";
+import styles from "./Forms.module.css";
+import FormField from "./FormField";
+
+interface RegisterFormI {
+  name: string;
+  email: string;
+  password: string;
+}
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const registerForm = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(registerValidation),
+  });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => alert("Ok");
 
   return (
     <>
       <DialogContentText classes={cn(styles.title)}></DialogContentText>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          margin="dense"
-          id="name"
-          label="Почта"
-          type="email"
-          fullWidth
-          variant="standard"
-          {...register("example")}
-        />
-        <TextField
-          margin="dense"
-          id="password"
-          label="Пароль"
-          type="password"
-          fullWidth
-          variant="standard"
-          {...register("password")}
-        />
+      <FormProvider {...registerForm}>
+        <form onSubmit={registerForm.handleSubmit(onSubmit)}>
+          <FormField name="email" label="Почта"></FormField>
+          <FormField name="password" label="Пароль"></FormField>
+          {/* <TextField
+            margin="dense"
+            id="name"
+            label="Имя"
+            type="name"
+            fullWidth
+            size="small"
+            variant="standard"
+            error={!!errors.name?.message}
+            helperText={errors?.name?.message}
+            classes={{ root: styles.field }}
+            {...register("email")}
+          /> */}
+          {/* <TextField
+            margin="dense"
+            id="email"
+            label="Почта"
+            type="email"
+            fullWidth
+            size="small"
+            variant="standard"
+            error={!!errors.email?.message}
+            helperText={errors.email?.message}
+            classes={{ root: styles.field }}
+            {...register("email")}
+          />
 
-        {/* <TextField
+          <TextField
+            margin="none"
+            id="password"
+            label="Пароль"
+            type="password"
+            fullWidth
+            size="small"
+            variant="standard"
+            error={!!errors.password?.message}
+            helperText={errors.password?.message}
+            classes={{ root: styles.field }}
+            {...register("password")}
+          /> */}
+          {/* <TextField
         margin="dense"
         id="name"
         label="Повторите пароль"
@@ -62,12 +77,14 @@ const Register = () => {
         fullWidth
         variant="standard"
       /> */}
-        <div className={cn(styles.container)}>
-          <button type="submit" className={cn(styles.button)}>
-            Войти
-          </button>
-        </div>
-      </form>
+
+          <div className={cn(styles.container)}>
+            <button type="submit" className={cn(styles.button)}>
+              Войти
+            </button>
+          </div>
+        </form>
+      </FormProvider>
     </>
   );
 };
