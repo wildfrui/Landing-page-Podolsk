@@ -1,4 +1,4 @@
-import { xhrGetUsers } from "../api/jsonApi";
+import { xhrGetUsers } from "../api/userApi";
 
 import { setUsers } from "../actions/jsonActions";
 import JsonActionType from "enums/JsonActionType";

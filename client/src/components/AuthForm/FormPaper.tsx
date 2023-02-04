@@ -7,19 +7,9 @@ interface FormPaperI {
 }
 
 const FormPaper = ({ children }: FormPaperI) => {
-  //   const handleClose = () => {
-  //     onClose();
-  //   };
-
-  //   const handleChangeType = () => {
-  //     setFormType(FormType.LOGIN);
-  //   };
   return (
     <>
-      <Paper classes={{ root: styles.background }}>
-        {/* <Typography classes={{ root: styles.background__logo }}>
-        </Typography> */}
-      </Paper>
+      <Paper classes={{ root: styles.background }}></Paper>
       <Paper classes={{ root: styles.container }}>{children}</Paper>
     </>
   );

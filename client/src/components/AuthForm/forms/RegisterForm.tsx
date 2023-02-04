@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import registerValidation from "utils/schemas/registerValidation";
 import styles from "./Forms.module.css";
 import FormField from "components/FormField";
+import { xhrGetUsers } from "api/userApi";
 
 const RegisterForm = () => {
   const registerForm = useForm({
@@ -21,7 +22,14 @@ const RegisterForm = () => {
 
   console.log(errors);
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async () => {
+    try {
+      const users = await xhrGetUsers();
+      console.log(users);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
   return (
     <>
