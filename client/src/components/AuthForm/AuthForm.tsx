@@ -40,12 +40,12 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
       classes={{ paper: styles.container }}
     >
       <DialogTitle classes={{ root: styles.title }}>
-        {conditions.login ? "Вход в аккаунт" : "Регистрация"}
+        {Boolean(conditions.login) ? "Вход в аккаунт" : "Регистрация"}
       </DialogTitle>
       <DialogContent classes={{ root: styles.content }}>
         {formType === FormType.EMAIL_LOGIN && <LoginForm></LoginForm>}
         {formType === FormType.EMAIL_REGISTER && <RegisterForm></RegisterForm>}
-        {conditions.loginOrRegister && (
+        {Boolean(conditions.loginOrRegister) && (
           <div className={cn(styles.options)}>
             <Button
               classes={{ root: styles.option }}
@@ -59,7 +59,7 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
         )}
 
         <Typography>
-          {conditions.login ? (
+          {Boolean(conditions.login) ? (
             <>
               Нет аккаунта?
               <button
