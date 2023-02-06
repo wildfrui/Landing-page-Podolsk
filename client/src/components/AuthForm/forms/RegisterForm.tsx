@@ -36,7 +36,7 @@ const RegisterForm = () => {
       <DialogContentText classes={cn(styles.title)}></DialogContentText>
       <FormProvider {...registerForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField name="name" label="Имя"></FormField>
+          <FormField name="name" label="Имя" focused></FormField>
           <FormField name="email" label="Почта"></FormField>
           <FormField name="password" label="Пароль"></FormField>
           <div className={cn(styles.container)}>

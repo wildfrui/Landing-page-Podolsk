@@ -26,7 +26,7 @@ const LoginForm = () => {
       <DialogContentText classes={cn(styles.title)}></DialogContentText>
       <FormProvider {...loginForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField name="email" label="Почта"></FormField>
+          <FormField name="email" label="Почта" focused></FormField>
           <FormField name="password" label="Пароль"></FormField>
           <div className={cn(styles.container)}>
             <button className={cn(styles.button)}>Войти</button>
