@@ -9,6 +9,7 @@ import { FilesModule } from './files/files.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { RoleEntity } from './role/entities/role.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { RoleEntity } from './role/entities/role.entity';
     FilesModule,
     UserModule,
     RoleModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
