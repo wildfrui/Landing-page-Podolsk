@@ -1,3 +1,5 @@
+import { RolesGuard } from './../auth/roles.guard';
+import { Roles } from './../auth/auth-roles.decorator';
 import {
   Controller,
   Get,
@@ -6,10 +8,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @Controller('users')
 export class UserController {
@@ -20,15 +25,22 @@ export class UserController {
     return this.userService.createUser(createUserDto);
   }
 
+  @Post('/roles')
+  addRole(@Body() addRoleDto: AddRoleDto) {
+    return this.userService.addRole(addRoleDto);
+  }
+
+  // @Roles('user')
+  // @UseGuards(RolesGuard)
   @Get()
   findAll() {
     return this.userService.findAllUsers();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.userService.findOne(+id);
+  // }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

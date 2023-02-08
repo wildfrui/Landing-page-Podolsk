@@ -1,22 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { RoleService } from 'src/role/role.service';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
-    private rolesService: RoleService,
+    private roleService: RoleService,
   ) {}
 
   async createUser(createUserDto: CreateUserDto) {
     const user = this.userRepository.create({ ...createUserDto });
-    const role = await this.rolesService.findByValue('user');
+    const role = await this.roleService.findByValue('user');
     user.roles = [role];
     await this.userRepository.save(user);
     return user;
@@ -29,9 +30,9 @@ export class UserService {
     return users;
   }
 
-  async findOne(id: number) {
-    const user = await this.userRepository.findOneBy({ id });
-  }
+  // async findOne(id: number) {
+  //   const user = await this.userRepository.findOneBy({ id });
+  // }
 
   async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({
@@ -39,6 +40,24 @@ export class UserService {
       relations: { roles: true },
     });
     return user;
+  }
+
+  async addRole(addRoleDto: AddRoleDto) {
+    const user = await this.userRepository.findOne({
+      where: { id: addRoleDto.userId },
+      relations: { roles: true },
+    });
+    const role = await this.roleService.findByValue(addRoleDto.value);
+    if (user && role) {
+      console.log(user);
+      user.roles.push(role);
+      await this.userRepository.save(user);
+      return addRoleDto;
+    }
+    throw new HttpException(
+      'Пользователь или роль не найдены',
+      HttpStatus.NOT_FOUND,
+    );
   }
 
   // update(id: number, updateUserDto: UpdateUserDto) {

@@ -27,7 +27,7 @@ export class AuthService {
   async register(userDto: CreateUserDto) {
     const candidate = await this.userService.getUserByEmail(userDto.email);
 
-    if (candidate === null) {
+    if (candidate !== null) {
       throw new HttpException(
         'Пользователь с таким email уже существует',
         HttpStatus.BAD_REQUEST,
@@ -55,10 +55,12 @@ export class AuthService {
 
   private async validateUser(userDto: CreateUserDto) {
     const user = await this.userService.getUserByEmail(userDto.email);
+    console.log(user);
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
     );
+    console.log(user, passwordEquals);
     if (user && passwordEquals) {
       return user;
     }
