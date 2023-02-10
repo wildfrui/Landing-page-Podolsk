@@ -8,8 +8,13 @@ import RegisterForm from "./forms/RegisterForm";
 import LoginForm from "./forms/LoginForm";
 import { FormType } from "enums/FormType";
 import { AuthFormI } from "interfaces/AuthFormI";
-import styles from "./AuthForm.module.css";
 import FormPaper from "./FormPaper";
+import FormField from "components/FormField";
+import FormWrapper from "./forms/FormWrapper";
+import styles from "./AuthForm.module.css";
+import loginValidation from "utils/schemas/loginValidation";
+import registerValidation from "utils/schemas/registerValidation";
+import MainOptions from "./forms/MainOptions";
 
 const AuthForm = ({ open, onClose }: AuthFormI) => {
   const [formType, setFormType] = useState<FormType>(FormType.REGISTER);
@@ -43,19 +48,31 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
         {Boolean(conditions.login) ? "Вход в аккаунт" : "Регистрация"}
       </DialogTitle>
       <DialogContent classes={{ root: styles.content }}>
-        {formType === FormType.EMAIL_LOGIN && <LoginForm></LoginForm>}
-        {formType === FormType.EMAIL_REGISTER && <RegisterForm></RegisterForm>}
+        {formType === FormType.EMAIL_LOGIN && (
+          <LoginForm></LoginForm>
+          // <FormWrapper schema={loginValidation}>
+          //   <FormField name="email" label="Почта" focused></FormField>
+          //   <FormField name="password" label="Пароль"></FormField>
+          //   <div className={cn(styles.form_container)}>
+          //     <button className={cn(styles.button)}>Войти</button>
+          //   </div>
+          // </FormWrapper>
+        )}
+        {formType === FormType.EMAIL_REGISTER && (
+          <RegisterForm></RegisterForm>
+          // <FormWrapper schema={registerValidation}>
+          //   <FormField name="name" label="Имя" focused></FormField>
+          //   <FormField name="email" label="Почта"></FormField>
+          //   <FormField name="password" label="Пароль"></FormField>
+          //   <div className={cn(styles.form_container)}>
+          //     <button type="submit" className={cn(styles.button)}>
+          //       Зарегистрироваться
+          //     </button>
+          //   </div>
+          // </FormWrapper>
+        )}
         {Boolean(conditions.loginOrRegister) && (
-          <div className={cn(styles.options)}>
-            <Button
-              classes={{ root: styles.option }}
-              onClick={() => handleChange()}
-            >
-              Почта
-            </Button>
-            <Button classes={{ root: styles.option }}>Google</Button>
-            <Button classes={{ root: styles.option }}>ВКонтакте</Button>
-          </div>
+          <MainOptions handleChange={handleChange}></MainOptions>
         )}
 
         <Typography>
