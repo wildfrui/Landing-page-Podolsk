@@ -6,11 +6,13 @@ import styles from "./Forms.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
 import loginValidation from "utils/schemas/loginValidation";
+import { xhrCreatePost } from "api/postsApi";
+import { CreatePostI } from "interfaces/CreatePostI";
 
 const LoginForm = () => {
   const loginForm = useForm({
     mode: "onSubmit",
-    resolver: yupResolver(loginValidation),
+    // resolver: yupResolver(loginValidation),
   });
 
   const {
@@ -18,16 +20,23 @@ const LoginForm = () => {
     formState: { errors },
   } = loginForm;
 
-  console.log(errors);
+  const onSubmit = async (dto: any) => {
+    console.log(dto);
+    try {
+      const posts = await xhrCreatePost(dto);
+      console.log(posts);
+    } catch (err) {
+      console.warn(err);
+    }
+  };
 
-  const onSubmit = (data: any) => console.log(data);
   return (
     <>
       <DialogContentText classes={cn(styles.title)}></DialogContentText>
       <FormProvider {...loginForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField name="email" label="Почта" focused></FormField>
-          <FormField name="password" label="Пароль"></FormField>
+          <FormField name="postTitle" label="Почта" focused></FormField>
+          <FormField name="postDescription" label="Пароль"></FormField>
           <div className={cn(styles.container)}>
             <button className={cn(styles.button)}>Войти</button>
           </div>

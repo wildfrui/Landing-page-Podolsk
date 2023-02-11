@@ -7,7 +7,7 @@ import styles from "./Logo.module.css";
 const Logo = ({ component }) => {
   return (
     <a className={classnames(styles.logo, styles[component])} href="/">
-      в<span className={classnames(styles.word)}>ПОДОЛЬСКE</span>
+      в<span className={classnames(styles.word)}>П</span>
     </a>
   );
 };

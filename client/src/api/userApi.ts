@@ -9,6 +9,7 @@ import { AxiosResponse } from "axios";
 //   );
 //   return data;
 // };
+
 export const xhrGetUsers = async () => {
   const { data } = await serviceClient.get<AxiosResponse>(
     "/users"

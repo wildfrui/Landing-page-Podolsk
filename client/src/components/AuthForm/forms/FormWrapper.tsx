@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactChild, ReactElement, ReactNode } from "react";
 import { DialogContentText } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,7 +9,7 @@ import styles from "./Forms.module.css";
 import { AnyObjectSchema } from "yup";
 
 type FormWrapperI = {
-  children: ReactNode;
+  children: ReactNode | ReactElement;
   schema: AnyObjectSchema;
 };
 

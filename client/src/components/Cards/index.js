@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import styles from "./Cards.module.css";
 import Card from "../Card";
+import { xhrGetPosts } from "api/postsApi";
 
 const Cards = ({ cards }) => {
+  const [posts, setPosts] = useState([]);
+
+  const getPosts = async () => {
+    try {
+      const { posts } = await xhrGetPosts();
+      console.log(posts);
+      setPosts(posts);
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <section className={classnames(styles.cards)}>
-      {cards.map((card) => {
+      {posts?.map((card) => {
         return (
           <Card
-            title={card.title}
-            text={card.text}
-            image={card.image}
+            title={card.postTitle}
+            text={card.postDescription}
+            image="url(/images/cafe.jpg)"
             id={card.id}
-            component={card.component}
+            component="content"
           ></Card>
         );
       })}
