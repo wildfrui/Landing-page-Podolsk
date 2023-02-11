@@ -1,3 +1,11 @@
+.container {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .cards {
   display: flex;
   justify-content: space-between;

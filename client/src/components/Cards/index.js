@@ -6,38 +6,51 @@ import Card from "../Card";
 import { xhrGetPosts, xhrPaginatePosts } from "api/postsApi";
 
 const Cards = ({ cards }) => {
-  const [data, setData] = useState([]);
-  const [skip, setSkip] = useState(0);
+  const [posts, setPosts] = useState([]);
+  const [meta, setMeta] = useState({});
+  const [page, setPage] = useState(1);
 
   const getPosts = async () => {
     try {
-      const { posts } = await xhrPaginatePosts({ skip, limit: 10 });
-      console.log(posts);
-      setData([...data, ...posts]);
-      setSkip((prev) => prev + 10);
+      const { data, meta } = await xhrPaginatePosts({ take: 10, page });
+      console.log(data, meta);
+      setPosts(data);
+      setMeta(meta);
     } catch (err) {
       console.warn(err);
     }
   };
 
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [page]);
 
   return (
-    <div className={classnames(styles.cards)}>
-      {data?.map((card) => {
-        return (
-          <Card
-            title={card.postTitle}
-            text={card.postDescription}
-            image="url(/images/cafe.jpg)"
-            id={card.id}
-            component="content"
-          ></Card>
-        );
-      })}
-      <Pagination count={10} color="secondary" />
+    <div className={classnames(styles.container)}>
+      <div className={classnames(styles.cards)}>
+        {posts?.map((card) => {
+          return (
+            <Card
+              title={card.postTitle}
+              text={card.postDescription}
+              image="url(/images/cafe.jpg)"
+              id={card.id}
+              component="content"
+            ></Card>
+          );
+        })}
+      </div>
+      <div className={classnames(styles.pagination)}>
+        <Pagination
+          count={meta.pageCount}
+          onChange={handleChange}
+          color="secondary"
+        />
+      </div>
     </div>
   );
 };

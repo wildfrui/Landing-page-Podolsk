@@ -1,4 +1,4 @@
 export interface PaginatePostsI {
-  limit: number;
-  skip: number;
+  page?: number;
+  take?: number;
 }
