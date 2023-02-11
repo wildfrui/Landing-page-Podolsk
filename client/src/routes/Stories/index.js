@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Pagination from "@mui/material/Pagination";
 import Header from "../../components/Header";
 import MainSection from "../../components/MainSection";
 import Title from "../../components/Title";
@@ -98,6 +99,7 @@ const Stories = () => {
           ></Title> */}
           <Cards cards={stories}></Cards>
         </MainSection>
+
         <Footer>
           <Contacts></Contacts>
         </Footer>

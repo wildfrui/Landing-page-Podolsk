@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
+import Pagination from "@mui/material/Pagination";
 import styles from "./Cards.module.css";
 import Card from "../Card";
-import { xhrGetPosts } from "api/postsApi";
+import { xhrGetPosts, xhrPaginatePosts } from "api/postsApi";
 
 const Cards = ({ cards }) => {
-  const [posts, setPosts] = useState([]);
+  const [data, setData] = useState([]);
+  const [skip, setSkip] = useState(0);
 
   const getPosts = async () => {
     try {
-      const { posts } = await xhrGetPosts();
+      const { posts } = await xhrPaginatePosts({ skip, limit: 10 });
       console.log(posts);
-      setPosts(posts);
+      setData([...data, ...posts]);
+      setSkip((prev) => prev + 10);
     } catch (err) {
       console.warn(err);
     }
@@ -22,8 +25,8 @@ const Cards = ({ cards }) => {
   }, []);
 
   return (
-    <section className={classnames(styles.cards)}>
-      {posts?.map((card) => {
+    <div className={classnames(styles.cards)}>
+      {data?.map((card) => {
         return (
           <Card
             title={card.postTitle}
@@ -34,7 +37,8 @@ const Cards = ({ cards }) => {
           ></Card>
         );
       })}
-    </section>
+      <Pagination count={10} color="secondary" />
+    </div>
   );
 };
 

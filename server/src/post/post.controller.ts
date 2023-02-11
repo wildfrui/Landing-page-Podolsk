@@ -1,3 +1,4 @@
+import { PageDto } from './dto/post-page.dto';
 import { SearchPostDto } from './dto/search-post.dto';
 import { PostEntity } from './entities/post.entity';
 import {
@@ -17,6 +18,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { PageOptionsDto } from './dto/post-page-options.dto';
 
 @ApiTags('post-controller')
 @Controller('posts')
@@ -34,11 +36,18 @@ export class PostController {
     return this.postService.createPost(createPostDto);
   }
 
-  @ApiOperation({ summary: 'Получить все посты' })
-  @ApiResponse({ status: 200, type: [PostEntity] })
+  // @ApiOperation({ summary: 'Получить все посты' })
+  // @ApiResponse({ status: 200, type: [PostEntity] })
+  // @Get()
+  // getAll() {
+  //   return this.postService.getAllPosts();
+  // }
+
   @Get()
-  getAll() {
-    return this.postService.getAllPosts();
+  async getWithPaginate(
+    @Query() pageOptionsDto: PageOptionsDto,
+  ): Promise<PageDto<CreatePostDto>> {
+    return this.postService.paginatePosts(pageOptionsDto);
   }
 
   @Get(':id')

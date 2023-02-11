@@ -1,3 +1,4 @@
+import { PageOptionsDto } from './dto/post-page-options.dto';
 import { PostEntity } from './entities/post.entity';
 import { Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -7,6 +8,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { FilesService } from 'src/files/files.service';
 import { SearchPostDto } from './dto/search-post.dto';
+import { PageDto } from './dto/post-page.dto';
+import { PageMetaDto } from './dto/post-page-meta.dto';
 
 @Injectable()
 export class PostService {
@@ -27,6 +30,21 @@ export class PostService {
     const posts = await this.postRepository.find();
     const sum = await this.getViewsSum();
     return { posts, sum };
+  }
+
+  async paginatePosts(
+    pageOptionsDto: PageOptionsDto,
+  ): Promise<PageDto<CreatePostDto>> {
+    console.log(pageOptionsDto.skip);
+    const qb = this.postRepository.createQueryBuilder('posts');
+
+    qb.skip(pageOptionsDto.skip).take(pageOptionsDto.take);
+    const itemCount = await qb.getCount();
+    const { entities } = await qb.getRawAndEntities();
+    const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
+    const pageDto = new PageDto(entities, pageMetaDto);
+    console.log(pageDto);
+    return pageDto;
   }
 
   async getOnePost(id: number) {
