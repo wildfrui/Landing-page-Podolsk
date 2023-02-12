@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import Pagination from "@mui/material/Pagination";
+import { yellow } from "@mui/material/colors";
 import styles from "./Cards.module.css";
 import Card from "../Card";
 import { xhrGetPosts, xhrPaginatePosts } from "api/postsApi";
 
-const Cards = ({ cards }) => {
+const Cards = ({ category }) => {
   const [posts, setPosts] = useState([]);
   const [meta, setMeta] = useState({});
   const [page, setPage] = useState(1);
 
   const getPosts = async () => {
     try {
-      const { data, meta } = await xhrPaginatePosts({ take: 10, page });
+      const { data, meta } = await xhrPaginatePosts({
+        take: 10,
+        page,
+        category,
+      });
       console.log(data, meta);
       setPosts(data);
       setMeta(meta);
@@ -49,6 +54,8 @@ const Cards = ({ cards }) => {
           count={meta.pageCount}
           onChange={handleChange}
           color="secondary"
+          variant="outlined"
+          size="large"
         />
       </div>
     </div>

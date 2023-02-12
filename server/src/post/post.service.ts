@@ -23,6 +23,7 @@ export class PostService {
     const post = await this.postRepository.save({
       ...createPostDto,
     });
+    console.log(post);
     return post;
   }
 
@@ -36,9 +37,14 @@ export class PostService {
     pageOptionsDto: PageOptionsDto,
   ): Promise<PageDto<CreatePostDto>> {
     console.log(pageOptionsDto.skip);
-    const qb = this.postRepository.createQueryBuilder('posts');
+    const qb = this.postRepository.createQueryBuilder('post');
 
-    qb.skip(pageOptionsDto.skip).take(pageOptionsDto.take);
+    qb.skip(pageOptionsDto.skip)
+      .take(pageOptionsDto.take)
+      .where('post.category = :category', {
+        category: pageOptionsDto.category,
+      });
+
     const itemCount = await qb.getCount();
     const { entities } = await qb.getRawAndEntities();
     const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });

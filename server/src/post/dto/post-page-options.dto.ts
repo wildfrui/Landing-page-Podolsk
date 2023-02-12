@@ -1,3 +1,5 @@
+import { Category } from '../const/Category';
+
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 
@@ -16,6 +18,9 @@ export class PageOptionsDto {
   @Max(50)
   @IsOptional()
   readonly take?: number = 10;
+
+  @Type(() => String)
+  readonly category?: Category = Category.stories;
 
   @Expose()
   get skip(): number {

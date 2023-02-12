@@ -12,7 +12,7 @@ import Support from "../../components/Support";
 import Logo from "../../components/Logo";
 import Page from "../../components/Page";
 
-import { getUsers } from "../../thunks/userThunks.ts";
+import { getUsers } from "../../thunks/userThunks";
 import { useDispatch, useSelector } from "react-redux";
 
 const links = [
@@ -97,7 +97,7 @@ const Stories = () => {
             text="Истории, рассказанные городом и пропитанные историей в 241 год"
             page="stories"
           ></Title> */}
-          <Cards cards={stories}></Cards>
+          <Cards category="stories"></Cards>
         </MainSection>
 
         <Footer>

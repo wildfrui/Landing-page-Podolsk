@@ -20,13 +20,6 @@ export class PostEntity {
   @Column()
   postTitle: string;
 
-  // @ApiProperty({
-  //   example: 'Гид по самому красивому месту Подмосковья',
-  //   description: 'Краткое описание статьи для превью',
-  // })
-  // @Column()
-  // postCategory: string;
-
   @ApiProperty({
     example: 'Гид по самому красивому месту Подмосковья',
     description: 'Краткое описание статьи для превью',
@@ -35,11 +28,18 @@ export class PostEntity {
   postDescription: string;
 
   @ApiProperty({
+    example: 'Гид по самому красивому месту Подмосковья',
+    description: 'Краткое описание статьи для превью',
+  })
+  @Column()
+  category: string;
+
+  @ApiProperty({
     example: '89',
     description: 'Количество просмотров',
   })
   @Column({ type: 'integer', default: 0 })
-  views: string;
+  views: number;
 
   @ApiProperty({
     example: 'Дата',
