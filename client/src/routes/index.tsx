@@ -2,11 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 
 import paths from "../enums/Paths";
 
-import Home from "./Home/index.js";
-import Stories from "./Stories/index.tsx";
-import Admin from "./Admin/index.js";
-import Test from "./Test/index.tsx";
-import Events from "./Events/index.tsx";
+import Home from "./Home";
+import Stories from "./Stories";
+import Admin from "./Admin";
+import Test from "./Test";
+import Events from "./Events";
 
 const router = createBrowserRouter([
   {
