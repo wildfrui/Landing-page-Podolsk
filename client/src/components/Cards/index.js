@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import Pagination from "@mui/material/Pagination";
-import { yellow } from "@mui/material/colors";
-import styles from "./Cards.module.css";
+import Masonry from "@mui/lab/Masonry";
 import Card from "../Card";
-import { xhrGetPosts, xhrPaginatePosts } from "api/postsApi";
+import { xhrPaginatePosts } from "api/postsApi";
+import styles from "./Cards.module.css";
 
 const Cards = ({ category }) => {
   const [posts, setPosts] = useState([]);
@@ -36,7 +36,7 @@ const Cards = ({ category }) => {
 
   return (
     <div className={classnames(styles.container)}>
-      <div className={classnames(styles.cards)}>
+      {/* <div className={classnames(styles.cards)}>
         {posts?.map((card) => {
           return (
             <Card
@@ -48,7 +48,19 @@ const Cards = ({ category }) => {
             ></Card>
           );
         })}
-      </div>
+      </div> */}
+      <Masonry columns={2} spacing={2}>
+        {posts.map((card) => (
+          <Card
+            title={card.postTitle}
+            text={card.postDescription}
+            image="url(/images/cafe.jpg)"
+            id={card.id}
+            component="content"
+          ></Card>
+        ))}
+      </Masonry>
+
       <div className={classnames(styles.pagination)}>
         <Pagination
           count={meta.pageCount}
