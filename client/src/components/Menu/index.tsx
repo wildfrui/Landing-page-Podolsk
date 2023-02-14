@@ -3,7 +3,17 @@ import { Link } from "react-router-dom";
 import classnames from "classnames";
 import styles from "./Menu.module.css";
 
-const Menu = ({ mix, links }) => {
+type Link = {
+  href: string;
+  name: string;
+};
+
+interface MenuI {
+  mix: string;
+  links: Link[];
+}
+
+const Menu = ({ mix, links }: MenuI) => {
   return (
     <>
       <div className={classnames(styles.menu, styles[mix])}>

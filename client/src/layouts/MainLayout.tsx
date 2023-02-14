@@ -16,16 +16,17 @@ const links = [
 
 interface MainLayoutI {
   children: ReactNode;
+  noLogo?: boolean;
 }
 
-const MainLayout = ({ children }: MainLayoutI) => {
+const MainLayout = ({ children, noLogo = false }: MainLayoutI) => {
   // const users = useSelector((state) => state.userState.users);
 
   return (
     <Page>
       <Header solid>
         <Menu mix="header" links={links}></Menu>
-        <Logo component="header"></Logo>
+        {!noLogo && <Logo component="header"></Logo>}
         <Support></Support>
       </Header>
       {children}

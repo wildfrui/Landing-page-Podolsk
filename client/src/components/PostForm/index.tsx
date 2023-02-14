@@ -12,10 +12,10 @@ const PostForm = () => {
             className={classnames(styles.title)}
             name=""
             id=""
-            cols="40"
-            rows="1"
+            cols={40}
+            rows={1}
             placeholder="Заголовок"
-            maxLength="100"
+            maxLength={100}
           ></textarea>
           <div className={classnames(styles.editor)}>
             <Editor></Editor>

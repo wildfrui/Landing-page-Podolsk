@@ -9,7 +9,7 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   return (
-    <MainLayout>
+    <MainLayout noLogo>
       <MainSection page="home">
         <Logo component="home"></Logo>
         <p className={classNames(styles.text)}>

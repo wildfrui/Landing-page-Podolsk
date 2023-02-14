@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import classnames from "classnames";
 
 import Menu from "../Menu";
@@ -6,7 +6,12 @@ import Logo from "../Logo";
 import Support from "../Support";
 import styles from "./Header.module.css";
 
-const Header = ({ children, solid }) => {
+interface HeaderI {
+  children: ReactNode;
+  solid: boolean;
+}
+
+const Header = ({ children, solid }: HeaderI) => {
   return (
     <>
       <header
