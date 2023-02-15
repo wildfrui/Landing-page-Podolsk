@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
-import Pagination from "@mui/material/Pagination";
 import Masonry from "@mui/lab/Masonry";
 import Card from "../Card";
+import PaginationApp from "components/Pagination";
+
 import { xhrPaginatePosts } from "api/postsApi";
 import styles from "./Cards.module.css";
 
 const Cards = ({ category }) => {
   const [posts, setPosts] = useState([]);
   const [meta, setMeta] = useState({});
-  const [page, setPage] = useState(1);
 
   const getPosts = async () => {
     try {
@@ -24,10 +24,6 @@ const Cards = ({ category }) => {
     } catch (err) {
       console.warn(err);
     }
-  };
-
-  const handleChange = (event, value) => {
-    setPage(value);
   };
 
   useEffect(() => {
@@ -60,16 +56,7 @@ const Cards = ({ category }) => {
           ></Card>
         ))}
       </Masonry>
-
-      <div className={classnames(styles.pagination)}>
-        <Pagination
-          count={meta.pageCount}
-          onChange={handleChange}
-          color="secondary"
-          variant="outlined"
-          size="large"
-        />
-      </div>
+      <PaginationApp pageCount={meta.pageCount}></PaginationApp>
     </div>
   );
 };
