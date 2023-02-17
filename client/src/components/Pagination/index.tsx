@@ -1,20 +1,18 @@
 import { Pagination } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 type PaginationI = {
-  pageCount: number;
+  handleChange: (event: any, value: any) => void;
 };
 
-const PaginationApp = ({ pageCount }: PaginationI) => {
-  const [page, setPage] = useState(1);
-
-  const handleChange = (event: any, value: any) => {
-    setPage(value);
-  };
+const PaginationApp = ({ handleChange }: PaginationI) => {
+  const pageMeta = useSelector((state: any) => state.metaState);
+  const dispatch = useDispatch();
 
   return (
     <Pagination
-      count={pageCount}
+      count={pageMeta.meta.pageCount}
       onChange={handleChange}
       color="secondary"
       variant="outlined"

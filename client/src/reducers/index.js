@@ -1,11 +1,9 @@
 import { combineReducers } from "redux";
 
-import { jsonReducer } from "./jsonReducer";
-import { cashReducer } from "./cashReducer";
+import { metaReducer } from "./metaReducer";
 
 const rootReducer = combineReducers({
-  userState: jsonReducer,
-  cashState: cashReducer,
+  metaState: metaReducer,
 });
 
 export default rootReducer;

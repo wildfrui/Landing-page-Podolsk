@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
 import Masonry from "@mui/lab/Masonry";
 import Card from "../Card";
 import PaginationApp from "components/Pagination";
 
 import { xhrPaginatePosts } from "api/postsApi";
+import { setMeta } from "actions/jsonActions";
 import styles from "./Cards.module.css";
 
 const Cards = ({ category }) => {
   const [posts, setPosts] = useState([]);
-  const [meta, setMeta] = useState({});
+  const [page, setPage] = useState(1);
+  const pageMeta = useSelector((state) => state.metaState);
+  const dispatch = useDispatch();
 
   const getPosts = async () => {
     try {
@@ -19,15 +23,22 @@ const Cards = ({ category }) => {
         category,
       });
       console.log(data, meta);
+
       setPosts(data);
-      setMeta(meta);
+      dispatch(setMeta(meta));
     } catch (err) {
       console.warn(err);
     }
   };
 
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 });
     getPosts();
+    console.log(pageMeta);
   }, [page]);
 
   return (
@@ -56,7 +67,7 @@ const Cards = ({ category }) => {
           ></Card>
         ))}
       </Masonry>
-      <PaginationApp pageCount={meta.pageCount}></PaginationApp>
+      <PaginationApp handleChange={handleChange}></PaginationApp>
     </div>
   );
 };
