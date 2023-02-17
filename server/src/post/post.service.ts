@@ -21,7 +21,10 @@ export class PostService {
   async createPost(createPostDto: CreatePostDto) {
     // const filename = await this.filesService.createFile(image);
     const post = await this.postRepository.save({
-      ...createPostDto,
+      postTitle: createPostDto.postTitle,
+      postDescription: createPostDto.postDescription,
+      body: createPostDto.body,
+      category: createPostDto.category,
     });
     console.log(post);
     return post;

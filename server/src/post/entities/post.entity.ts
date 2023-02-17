@@ -31,6 +31,13 @@ export class PostEntity {
     example: 'Гид по самому красивому месту Подмосковья',
     description: 'Краткое описание статьи для превью',
   })
+  @Column({ type: 'jsonb' })
+  body: any[];
+
+  @ApiProperty({
+    example: 'Гид по самому красивому месту Подмосковья',
+    description: 'Краткое описание статьи для превью',
+  })
   @Column()
   category: string;
 

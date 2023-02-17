@@ -1,5 +1,5 @@
 import { CreateUserI } from "interfaces/CreateUserI";
-import serviceClient from "../config/serviceClient";
+import instance from "api";
 import { AxiosResponse } from "axios";
 
 // export const xhrGetUsers = async (createUserDto: CreateUserI) => {
@@ -11,7 +11,7 @@ import { AxiosResponse } from "axios";
 // };
 
 export const xhrGetUsers = async () => {
-  const { data } = await serviceClient.get<AxiosResponse>(
+  const { data } = await instance.get<AxiosResponse>(
     "/users"
     // { data: createUserDto }
   );

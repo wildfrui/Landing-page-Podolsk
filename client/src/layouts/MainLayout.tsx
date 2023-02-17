@@ -12,6 +12,7 @@ const links = [
   { name: "СОБЫТИЯ", href: "/events" },
   { name: "КАРТА", href: "/map" },
   { name: "ПРОЕКТ", href: "/about" },
+  { name: "СОЗДАТЬ", href: "/admin" },
 ];
 
 interface MainLayoutI {

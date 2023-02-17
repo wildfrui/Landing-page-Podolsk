@@ -1,26 +1,26 @@
-import { CreatePostI } from "interfaces/CreatePostI";
+import { CreatePostDto } from "interfaces/CreatePostDto";
 import { PaginatePostsI } from "interfaces/PaginatePostsI";
-import serviceClient from "../config/serviceClient";
+import instance from "api";
 import { AxiosResponse } from "axios";
 
 export const xhrGetPosts = async (): Promise<AxiosResponse> => {
-  const { data } = await serviceClient.get<AxiosResponse>("/posts");
+  const { data } = await instance.get<AxiosResponse>("/posts");
   return data;
 };
+
 export const xhrPaginatePosts = async (
   paginatePosts: PaginatePostsI
 ): Promise<AxiosResponse> => {
-  const { data } = await serviceClient.get<PaginatePostsI, AxiosResponse>(
-    "/posts",
-    { params: paginatePosts }
-  );
+  const { data } = await instance.get<PaginatePostsI, AxiosResponse>("/posts", {
+    params: paginatePosts,
+  });
   return data;
 };
 
 export const xhrCreatePost = async (
-  createPost: CreatePostI
+  createPost: CreatePostDto
 ): Promise<AxiosResponse> => {
-  const { data } = await serviceClient.post<CreatePostI, AxiosResponse>(
+  const { data } = await instance.post<CreatePostDto, AxiosResponse>(
     "/posts",
     createPost
   );
