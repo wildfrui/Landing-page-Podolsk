@@ -2,6 +2,7 @@ import { CreatePostDto } from "interfaces/CreatePostDto";
 import { PaginatePostsI } from "interfaces/PaginatePostsI";
 import instance from "api";
 import { AxiosResponse } from "axios";
+import { PostResponse } from "types/PostResponse";
 
 export const xhrGetPosts = async (): Promise<AxiosResponse> => {
   const { data } = await instance.get<AxiosResponse>("/posts");
@@ -18,11 +19,11 @@ export const xhrPaginatePosts = async (
 };
 
 export const xhrCreatePost = async (
-  createPost: CreatePostDto
-): Promise<AxiosResponse> => {
-  const { data } = await instance.post<CreatePostDto, AxiosResponse>(
+  dto: CreatePostDto
+): Promise<PostResponse> => {
+  const { data } = await instance.post<CreatePostDto, { data: PostResponse }>(
     "/posts",
-    createPost
+    dto
   );
   return data;
 };
