@@ -10,9 +10,9 @@
 }
 
 .background {
-  background-image: url(https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=781&q=80);
+  background-image: url(https://images.unsplash.com/photo-1613328007570-379c5b22317d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80);
   background-size: cover;
-  background-position: left;
+  background-position: center;
   border-radius: 8px 0 0 8px !important;
   width: 250px;
   height: 660px;

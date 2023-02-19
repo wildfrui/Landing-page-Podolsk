@@ -9,11 +9,13 @@
   height: auto;
   display: flex;
   align-items: center;
-  border-bottom-right-radius: 20px;
-  background-color: black;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  background-color: #32936f;
 }
 
 .title {
+  max-width: 1000px;
   padding: 20px;
   margin-top: 0;
   color: #fff;
@@ -28,7 +30,14 @@
 }
 
 .info {
+  width: auto;
   display: flex;
+  justify-content: space-between;
+}
+.meta {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .published {
@@ -36,7 +45,13 @@
   margin-bottom: 10px;
   text-transform: italic;
   margin-right: 20px;
-  color: #f7b32b;
+  color: #2b9075;
+}
+
+.category {
+  color: black;
+  text-decoration: underline;
+  background-color: #c1eeff;
 }
 
 .article {
@@ -44,7 +59,7 @@
   margin-top: 40px;
   min-height: auto;
   height: fit-content;
-  padding: 0 30px;
+  padding: 0 50px;
   font-size: 20px;
 }
 

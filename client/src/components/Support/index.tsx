@@ -29,7 +29,7 @@ const Support = () => {
     //   Авторизоваться
     // </a>
     <>
-      <button onClick={() => handleClick()}>Авторизоваться</button>
+      <button className={styles.button} onClick={() => handleClick()}>Авторизоваться</button>
       <AuthForm open={open} onClose={handleClose}></AuthForm>
     </>
   );

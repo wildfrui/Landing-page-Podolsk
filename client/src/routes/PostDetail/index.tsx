@@ -1,11 +1,12 @@
-import { xhrGetOnePost } from "api/postsApi";
 import React, { useEffect, useState } from "react";
+import cn from "classnames";
+import { xhrGetOnePost } from "api/postsApi";
 import { useParams } from "react-router-dom";
 import { PostResponse } from "types/PostResponse";
 import MainLayout from "layouts/MainLayout";
-import styles from "./PostDetail.module.css";
 import MainSection from "components/MainSection";
 import { changeDateFormatForTitle } from "utils";
+import styles from "./PostDetail.module.css";
 
 type Props = {};
 
@@ -37,10 +38,15 @@ const PostDetail = (props: Props) => {
             </div>
             <p className={styles.description}>{post.postDescription}</p>
             <div className={styles.info}>
-              <p className={styles.published}>
-                Дата публикации {changeDateFormatForTitle(post.createdAt)}
+              <p className={cn(styles.published, styles.category)}>
+                Контроль таможенной стоимости
               </p>
-              <p className={styles.published}>Время чтения: 5 минут</p>
+              <div className={styles.meta}>
+                <p className={styles.published}>
+                  Дата публикации {changeDateFormatForTitle(post.createdAt)}
+                </p>
+                <p className={styles.published}>Время чтения: 5 минут</p>
+              </div>
             </div>
             <div className={styles.article}>
               {post?.body?.map((obj) => (

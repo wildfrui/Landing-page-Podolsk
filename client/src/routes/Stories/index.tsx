@@ -5,7 +5,7 @@ import MainLayout from "layouts/MainLayout";
 
 const Stories = () => {
   return (
-    <MainLayout>
+    <MainLayout noLogo>
       <MainSection page="stories">
         <Cards category="stories"></Cards>
       </MainSection>
