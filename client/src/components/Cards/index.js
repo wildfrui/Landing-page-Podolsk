@@ -38,7 +38,6 @@ const Cards = ({ category }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
     getPosts();
-    console.log(pageMeta);
   }, [page]);
 
   return (
@@ -59,6 +58,7 @@ const Cards = ({ category }) => {
       <Masonry columns={2} spacing={2}>
         {posts.map((card) => (
           <Card
+            key={card.id}
             title={card.postTitle}
             text={card.postDescription}
             image="url(/images/cafe.jpg)"

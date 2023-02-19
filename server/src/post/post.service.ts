@@ -46,7 +46,8 @@ export class PostService {
       .take(pageOptionsDto.take)
       .where('post.category = :category', {
         category: pageOptionsDto.category,
-      });
+      })
+      .orderBy('post.id', 'ASC');
 
     const itemCount = await qb.getCount();
     const { entities } = await qb.getRawAndEntities();

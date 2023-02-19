@@ -9,6 +9,18 @@ export const xhrGetPosts = async (): Promise<AxiosResponse> => {
   return data;
 };
 
+export const xhrGetOnePost = async (id: number): Promise<PostResponse> => {
+  const { data } = await instance.get<number, { data: PostResponse }>(
+    `/posts/${id}`,
+    {
+      params: {
+        id,
+      },
+    }
+  );
+  return data;
+};
+
 export const xhrPaginatePosts = async (
   paginatePosts: PaginatePostsI
 ): Promise<AxiosResponse> => {
