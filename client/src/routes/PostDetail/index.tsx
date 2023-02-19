@@ -16,7 +16,7 @@ const PostDetail = (props: Props) => {
   useEffect(() => {
     const getPost = async () => {
       const post = await xhrGetOnePost(Number(postId));
-      console.log(post);
+      console.log(post.body);
       setPost(post);
     };
     try {
@@ -28,16 +28,28 @@ const PostDetail = (props: Props) => {
 
   return (
     <MainLayout>
-      <div className={styles.background}></div>
+      {/* <div className={styles.background}></div> */}
       <MainSection page="postDetail">
         <div>
           <div className={styles.post}>
-            <h1 className={styles.title}>{post.postTitle}</h1>
+            <div className={styles.background}>
+              <h1 className={styles.title}>{post.postTitle}</h1>
+            </div>
             <p className={styles.description}>{post.postDescription}</p>
-            <p className={styles.published}>
-              Дата публикации {changeDateFormatForTitle(post.createdAt)}
-            </p>
-            <div className={styles.article}></div>
+            <div className={styles.info}>
+              <p className={styles.published}>
+                Дата публикации {changeDateFormatForTitle(post.createdAt)}
+              </p>
+              <p className={styles.published}>Время чтения: 5 минут</p>
+            </div>
+            <div className={styles.article}>
+              {post?.body?.map((obj) => (
+                <p
+                  className={styles.paragraph}
+                  dangerouslySetInnerHTML={{ __html: obj.data.text }}
+                ></p>
+              ))}
+            </div>
           </div>
         </div>
       </MainSection>
