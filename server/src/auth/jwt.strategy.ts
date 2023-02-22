@@ -1,10 +1,11 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private userService: UserService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -14,8 +15,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: { sub: number; email: string }) {
     const result = { id: payload.sub, email: payload.email };
-    if (!result) {
-      throw new UnauthorizedException({ message: 'Что-то пошло не так' });
+    const user = await this.userService.getUserByEmail(payload.email);
+    if (!user) {
+      throw new UnauthorizedException({
+        message: 'Пользователя не существует',
+      });
     }
     return result;
   }

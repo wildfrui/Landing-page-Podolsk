@@ -33,11 +33,8 @@ export class AuthService {
         HttpStatus.BAD_REQUEST,
       );
     }
-
-    const hashPassword = await bcrypt.hash(userDto.password, 5);
     const user = await this.userService.createUser({
       ...userDto,
-      password: hashPassword,
     });
     return this.generateToken(user);
   }
