@@ -11,7 +11,7 @@
   align-items: center;
   border-bottom-right-radius: 40px;
   border-top-right-radius: 40px;
-  background-color: #32936f;
+  background-color: #f2cd5d;
 }
 
 .title {
@@ -50,8 +50,7 @@
 
 .category {
   color: black;
-  text-decoration: underline;
-  background-color: #c1eeff;
+  background-color: #f2cd5d;
 }
 
 .article {

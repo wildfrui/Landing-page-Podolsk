@@ -18,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userService.getUserByEmail(payload.email);
     if (!user) {
       throw new UnauthorizedException({
-        message: 'Пользователя не существует',
+        message: 'Невалидный токен',
       });
     }
     return result;

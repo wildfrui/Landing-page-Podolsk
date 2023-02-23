@@ -8,7 +8,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import loginValidation from "utils/schemas/loginValidation";
 import { xhrLoginUser } from "api/userApi";
 import { LoginUserDto } from "interfaces/LoginUserDto";
-import { setCookie } from "nookies";
+import { setCookie, parseCookies } from "nookies";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "actions/userActions";
 

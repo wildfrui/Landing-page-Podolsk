@@ -5,6 +5,8 @@ import styles from "./Header.module.css";
 import Menu from "components/Menu";
 import Support from "components/Support";
 import { useSelector } from "react-redux";
+import { Avatar } from "@mui/material";
+import deepOrange from "@mui/material/colors/deepOrange";
 
 const links = [
   { name: "ИСТОРИИ", href: "/stories" },
@@ -32,7 +34,11 @@ const Header = ({ solid }: HeaderI) => {
         <div className={classnames(styles.container)}>
           <Menu mix="header" links={links}></Menu>
           {/* {!noLogo && <Logo component="header"></Logo>} */}
-          {userInfo ? <div>Профиль</div> : <Support></Support>}
+          {userInfo ? (
+            <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+          ) : (
+            <Support></Support>
+          )}
         </div>
       </header>
     </>
