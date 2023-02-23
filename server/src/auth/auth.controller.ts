@@ -13,10 +13,14 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
+import { UserService } from 'src/user/user.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UserService,
+  ) {}
 
   // @Post('/login')
   // login(@Body() userDto: CreateUserDto) {
@@ -30,9 +34,9 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
+  @Get('/me')
   getProfile(@Request() req) {
-    return req.user;
+    return this.userService.getUserByEmail(req.user.email);
   }
 
   @Post('/register')

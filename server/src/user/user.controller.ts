@@ -37,7 +37,6 @@ export class UserController {
     return this.userService.findOneUser(id);
   }
 
-
   @UseGuards(JwtAuthGuard)
   @Patch('/profile')
   update(@Request() req, @Body() updateUserDto: UpdateUserDto) {

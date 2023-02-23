@@ -14,13 +14,22 @@ import Test from "./Test";
 import Events from "./Events";
 import Post from "components/Post";
 import PostDetail from "./PostDetail";
+import BaseComponent from "components/BaseComponent/BaseComponent";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route index path="/" element={<Home></Home>} />
       <Route index path="/stories" element={<Stories></Stories>} />
-      <Route index path="/events" element={<Events></Events>} />
+      <Route
+        index
+        path="/events"
+        element={
+          <BaseComponent>
+            <Events></Events>
+          </BaseComponent>
+        }
+      />
       <Route index path="/admin" element={<Admin></Admin>} />
       <Route index path="/posts/:postId" element={<PostDetail></PostDetail>} />
     </>
