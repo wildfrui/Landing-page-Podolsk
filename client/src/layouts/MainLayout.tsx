@@ -27,7 +27,7 @@ const MainLayout = ({ children, noLogo = false }: MainLayoutI) => {
     <Page>
       <Header solid>
         <Menu mix="header" links={links}></Menu>
-        {!noLogo && <Logo component="header"></Logo>}
+        {/* {!noLogo && <Logo component="header"></Logo>} */}
         <Support></Support>
       </Header>
       {children}

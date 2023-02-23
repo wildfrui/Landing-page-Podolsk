@@ -43,10 +43,12 @@ export class UserService {
   }
 
   async getUserByEmail(email: string) {
+    console.log(email);
     const user = await this.userRepository.findOne({
       where: { email: email },
       relations: { roles: true },
     });
+    console.log(user);
     return user;
   }
 

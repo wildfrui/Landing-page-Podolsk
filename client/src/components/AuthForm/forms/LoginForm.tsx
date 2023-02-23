@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "classnames";
-import { DialogContentText, TextField } from "@mui/material";
+import { Alert, DialogContentText } from "@mui/material";
 import FormField from "../../FormField";
 import styles from "./Forms.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
 import loginValidation from "utils/schemas/loginValidation";
-import { xhrCreatePost } from "api/postsApi";
+import { xhrLoginUser } from "api/userApi";
+import { LoginUserDto } from "interfaces/LoginUserDto";
+import { setCookie } from "nookies";
 
 const LoginForm = () => {
-  const loginForm = useForm({
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const loginForm = useForm<LoginUserDto>({
     mode: "onSubmit",
     resolver: yupResolver(loginValidation),
   });
@@ -19,13 +23,20 @@ const LoginForm = () => {
     formState: { errors },
   } = loginForm;
 
-  const onSubmit = async (dto: any) => {
+  const onSubmit = async (dto: LoginUserDto) => {
     console.log(dto);
     try {
-      const posts = await xhrCreatePost(dto);
-      console.log(posts);
-    } catch (err) {
+      const user = await xhrLoginUser(dto);
+      console.log(user);
+      setCookie(null, "authToken", user.access_token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
+    } catch (err: any) {
       console.warn(err);
+      if (err.response) {
+        setErrorMessage(err.response.data.message);
+      }
     }
   };
 
@@ -34,10 +45,13 @@ const LoginForm = () => {
       <DialogContentText classes={cn(styles.title)}></DialogContentText>
       <FormProvider {...loginForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField name="postTitle" label="Почта" focused></FormField>
-          <FormField name="postDescription" label="Пароль"></FormField>
+          <FormField name="email" label="Почта" focused></FormField>
+          <FormField name="password" label="Пароль"></FormField>
+          {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
           <div className={cn(styles.container)}>
-            <button className={cn(styles.button)}>Войти</button>
+            <button type="submit" className={cn(styles.button)}>
+              Войти
+            </button>
           </div>
         </form>
       </FormProvider>

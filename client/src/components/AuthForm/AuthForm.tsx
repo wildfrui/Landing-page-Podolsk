@@ -48,29 +48,8 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
         {Boolean(conditions.login) ? "Вход в аккаунт" : "Регистрация"}
       </DialogTitle>
       <DialogContent classes={{ root: styles.content }}>
-        {formType === FormType.EMAIL_LOGIN && (
-          <LoginForm></LoginForm>
-          // <FormWrapper schema={loginValidation}>
-          //   <FormField name="email" label="Почта" focused></FormField>
-          //   <FormField name="password" label="Пароль"></FormField>
-          //   <div className={cn(styles.form_container)}>
-          //     <button className={cn(styles.button)}>Войти</button>
-          //   </div>
-          // </FormWrapper>
-        )}
-        {formType === FormType.EMAIL_REGISTER && (
-          <RegisterForm></RegisterForm>
-          // <FormWrapper schema={registerValidation}>
-          //   <FormField name="name" label="Имя" focused></FormField>
-          //   <FormField name="email" label="Почта"></FormField>
-          //   <FormField name="password" label="Пароль"></FormField>
-          //   <div className={cn(styles.form_container)}>
-          //     <button type="submit" className={cn(styles.button)}>
-          //       Зарегистрироваться
-          //     </button>
-          //   </div>
-          // </FormWrapper>
-        )}
+        {formType === FormType.EMAIL_LOGIN && <LoginForm></LoginForm>}
+        {formType === FormType.EMAIL_REGISTER && <RegisterForm></RegisterForm>}
         {Boolean(conditions.loginOrRegister) && (
           <MainOptions handleChange={handleChange}></MainOptions>
         )}

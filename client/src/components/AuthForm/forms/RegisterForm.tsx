@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "classnames";
-import { DialogContentText, TextField } from "@mui/material";
-
+import { Alert, DialogContentText } from "@mui/material";
+import { setCookie } from "nookies";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import registerValidation from "utils/schemas/registerValidation";
 import styles from "./Forms.module.css";
 import FormField from "components/FormField";
-import { xhrGetUsers } from "api/userApi";
+import { xhrRegisterUser } from "api/userApi";
+import { CreateUserDto } from "interfaces/CreateUserDto";
 
 const RegisterForm = () => {
-  const registerForm = useForm({
+  const [errorMessage, setErrorMessage] = useState(null);
+  const registerForm = useForm<CreateUserDto>({
     mode: "onSubmit",
     resolver: yupResolver(registerValidation),
   });
@@ -20,12 +22,15 @@ const RegisterForm = () => {
     formState: { errors },
   } = registerForm;
 
-  console.log(errors);
-
-  const onSubmit = async () => {
+  const onSubmit = async (dto: CreateUserDto) => {
+    console.log(dto);
     try {
-      const users = await xhrGetUsers();
-      console.log(users);
+      const user = await xhrRegisterUser(dto);
+      console.log(user);
+      setCookie(null, "authToken", user.access_token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
+      });
     } catch (e) {
       console.warn(e);
     }
@@ -39,6 +44,7 @@ const RegisterForm = () => {
           <FormField name="name" label="Имя" focused></FormField>
           <FormField name="email" label="Почта"></FormField>
           <FormField name="password" label="Пароль"></FormField>
+          {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
           <div className={cn(styles.container)}>
             <button type="submit" className={cn(styles.button)}>
               Зарегистрироваться
