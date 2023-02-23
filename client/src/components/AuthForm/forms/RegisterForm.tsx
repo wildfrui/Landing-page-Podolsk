@@ -11,7 +11,7 @@ import { xhrRegisterUser } from "api/userApi";
 import { CreateUserDto } from "interfaces/CreateUserDto";
 
 const RegisterForm = () => {
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const registerForm = useForm<CreateUserDto>({
     mode: "onSubmit",
     resolver: yupResolver(registerValidation),
@@ -31,8 +31,12 @@ const RegisterForm = () => {
         maxAge: 30 * 24 * 60 * 60,
         path: "/",
       });
-    } catch (e) {
-      console.warn(e);
+      setErrorMessage("");
+    } catch (err: any) {
+      console.warn(err);
+      if (err.response) {
+        setErrorMessage(err.response.data.message);
+      }
     }
   };
 
@@ -44,7 +48,11 @@ const RegisterForm = () => {
           <FormField name="name" label="Имя" focused></FormField>
           <FormField name="email" label="Почта"></FormField>
           <FormField name="password" label="Пароль"></FormField>
-          {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+          {errorMessage && (
+            <Alert sx={{ marginTop: "10px" }} severity="error">
+              {errorMessage}
+            </Alert>
+          )}
           <div className={cn(styles.container)}>
             <button type="submit" className={cn(styles.button)}>
               Зарегистрироваться

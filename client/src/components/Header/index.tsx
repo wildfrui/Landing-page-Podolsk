@@ -1,17 +1,27 @@
 import React, { ReactNode } from "react";
 import classnames from "classnames";
 
-import Menu from "../Menu";
-import Logo from "../Logo";
-import Support from "../Support";
 import styles from "./Header.module.css";
+import Menu from "components/Menu";
+import Support from "components/Support";
+import { useSelector } from "react-redux";
+
+const links = [
+  { name: "ИСТОРИИ", href: "/stories" },
+  { name: "СОБЫТИЯ", href: "/events" },
+  { name: "КАРТА", href: "/map" },
+  { name: "ПРОЕКТ", href: "/about" },
+  { name: "СОЗДАТЬ", href: "/admin" },
+];
 
 interface HeaderI {
-  children: ReactNode;
   solid: boolean;
 }
 
-const Header = ({ children, solid }: HeaderI) => {
+const Header = ({ solid }: HeaderI) => {
+  const userInfo = useSelector((state: any) => state.userState.user);
+  console.log(userInfo);
+
   return (
     <>
       <header
@@ -19,7 +29,11 @@ const Header = ({ children, solid }: HeaderI) => {
           [styles.header_solid]: solid,
         })}
       >
-        <div className={classnames(styles.container)}>{children}</div>
+        <div className={classnames(styles.container)}>
+          <Menu mix="header" links={links}></Menu>
+          {/* {!noLogo && <Logo component="header"></Logo>} */}
+          {userInfo ? <div>Профиль</div> : <Support></Support>}
+        </div>
       </header>
     </>
   );

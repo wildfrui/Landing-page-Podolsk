@@ -28,11 +28,10 @@ const Test = () => {
   return (
     <>
       <Page>
-        <Header solid>
-          <Menu mix="header" links={links}></Menu>
-          <Logo component="header"></Logo>
-          <Support></Support>
-        </Header>
+        <Menu mix="header" links={links}></Menu>
+        <Logo component="header"></Logo>
+        <Support></Support>
+
         <button onClick={() => handleClick()}></button>
         <AuthForm open={open} onClose={handleClose}></AuthForm>
       </Page>

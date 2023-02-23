@@ -41,12 +41,14 @@ export class AuthService {
   }
 
   async generateToken(user: UserEntity) {
+    const { password, ...userInfo } = user;
     const payload = {
       email: user.email,
       roles: user.roles,
       sub: user.id,
     };
     return {
+      ...userInfo,
       access_token: this.jwtService.sign(payload),
     };
   }

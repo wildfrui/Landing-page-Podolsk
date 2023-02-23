@@ -7,13 +7,6 @@ import Menu from "components/Menu";
 import Page from "components/Page";
 import Support from "components/Support";
 
-const links = [
-  { name: "ИСТОРИИ", href: "/stories" },
-  { name: "СОБЫТИЯ", href: "/events" },
-  { name: "КАРТА", href: "/map" },
-  { name: "ПРОЕКТ", href: "/about" },
-  { name: "СОЗДАТЬ", href: "/admin" },
-];
 
 interface MainLayoutI {
   children: ReactNode;
@@ -25,11 +18,7 @@ const MainLayout = ({ children, noLogo = false }: MainLayoutI) => {
 
   return (
     <Page>
-      <Header solid>
-        <Menu mix="header" links={links}></Menu>
-        {/* {!noLogo && <Logo component="header"></Logo>} */}
-        <Support></Support>
-      </Header>
+      <Header solid></Header>
       {children}
       <Footer>
         <Contacts></Contacts>

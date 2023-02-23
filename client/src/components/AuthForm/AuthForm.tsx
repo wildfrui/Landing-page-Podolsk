@@ -25,10 +25,6 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
       formType === FormType.REGISTER || formType === FormType.LOGIN,
   };
 
-  const handleClose = () => {
-    onClose();
-  };
-
   const handleChange = () => {
     if (formType === FormType.REGISTER) {
       setFormType(FormType.EMAIL_REGISTER);
@@ -40,7 +36,7 @@ const AuthForm = ({ open, onClose }: AuthFormI) => {
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={onClose}
       PaperComponent={({ children }) => <FormPaper>{children}</FormPaper>}
       classes={{ paper: styles.container }}
     >

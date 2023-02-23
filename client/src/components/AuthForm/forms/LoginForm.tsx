@@ -9,9 +9,12 @@ import loginValidation from "utils/schemas/loginValidation";
 import { xhrLoginUser } from "api/userApi";
 import { LoginUserDto } from "interfaces/LoginUserDto";
 import { setCookie } from "nookies";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "actions/userActions";
 
 const LoginForm = () => {
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
 
   const loginForm = useForm<LoginUserDto>({
     mode: "onSubmit",
@@ -32,6 +35,8 @@ const LoginForm = () => {
         maxAge: 30 * 24 * 60 * 60,
         path: "/",
       });
+      dispatch(setUserInfo(user));
+      setErrorMessage("");
     } catch (err: any) {
       console.warn(err);
       if (err.response) {
@@ -47,7 +52,11 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormField name="email" label="Почта" focused></FormField>
           <FormField name="password" label="Пароль"></FormField>
-          {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+          {errorMessage && (
+            <Alert sx={{ marginTop: "10px" }} severity="error">
+              {errorMessage}
+            </Alert>
+          )}
           <div className={cn(styles.container)}>
             <button type="submit" className={cn(styles.button)}>
               Войти

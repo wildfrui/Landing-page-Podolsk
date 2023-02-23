@@ -6,7 +6,7 @@ import Card from "../Card";
 import PaginationApp from "components/Pagination";
 
 import { xhrPaginatePosts } from "api/postsApi";
-import { setMeta } from "actions/jsonActions";
+import { setMeta } from "actions/metaActions";
 import styles from "./Cards.module.css";
 
 const Cards = ({ category }) => {
