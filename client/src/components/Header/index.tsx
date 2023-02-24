@@ -35,7 +35,10 @@ const Header = ({ solid }: HeaderI) => {
           <Menu mix="header" links={links}></Menu>
           {/* {!noLogo && <Logo component="header"></Logo>} */}
           {userInfo ? (
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+            <div>
+              {userInfo.name}
+              <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+            </div>
           ) : (
             <Support></Support>
           )}
