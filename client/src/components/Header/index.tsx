@@ -21,7 +21,7 @@ interface HeaderI {
 }
 
 const Header = ({ solid }: HeaderI) => {
-  const userInfo = useSelector((state: any) => state.userState.user);
+  const userInfo = useSelector((state: any) => state.authState.userInfo);
   console.log(userInfo);
 
   return (
@@ -35,9 +35,14 @@ const Header = ({ solid }: HeaderI) => {
           <Menu mix="header" links={links}></Menu>
           {/* {!noLogo && <Logo component="header"></Logo>} */}
           {userInfo ? (
-            <div>
+            <div className={styles.user_info}>
               {userInfo.name}
-              <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+              <Avatar
+                className={styles.user_avatar}
+                sx={{ bgcolor: deepOrange[500] }}
+              >
+                N
+              </Avatar>
             </div>
           ) : (
             <Support></Support>

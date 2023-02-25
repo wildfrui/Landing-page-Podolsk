@@ -26,7 +26,6 @@ export const xhrRegisterUser = async (dto: CreateUserDto) => {
       ...dto,
     }
   );
-  console.log(data);
   return data;
 };
 
@@ -37,12 +36,10 @@ export const xhrLoginUser = async (dto: LoginUserDto) => {
       ...dto,
     }
   );
-  console.log(data);
   return data;
 };
 
 export const xhrAuthUser = async () => {
   const { data } = await instance.get<LoginUserDto, AxiosResponse>("/auth/me");
-  console.log(data);
   return data;
 };

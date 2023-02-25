@@ -15,6 +15,14 @@
   font-family: "Oswald", sans-serif;
 }
 
+.user_info {
+  display: flex;
+  align-items: center;
+}
+.user_avatar {
+  margin-left: 20px;
+}
+
 @media (max-width: 600px) {
   /* !!!!!!!!!!!!!!!!!!!!!!!*/
   .header {

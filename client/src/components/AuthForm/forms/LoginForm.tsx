@@ -8,14 +8,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import loginValidation from "utils/schemas/loginValidation";
 import { xhrLoginUser } from "api/userApi";
 import { LoginUserDto } from "interfaces/LoginUserDto";
-import { setCookie, parseCookies } from "nookies";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "actions/userActions";
+import { setUserInfo } from "actions/authActions";
+import { useLocalStorage } from "hooks";
+import { UserResponse } from "types/UserResponse";
 
 const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const { setStorageValue } = useLocalStorage<UserResponse | null>(
+    "userInfo",
+    null
+  );
   const dispatch = useDispatch();
-
   const loginForm = useForm<LoginUserDto>({
     mode: "onSubmit",
     resolver: yupResolver(loginValidation),
@@ -31,10 +35,7 @@ const LoginForm = () => {
     try {
       const user = await xhrLoginUser(dto);
       console.log(user);
-      setCookie(null, "authToken", user.access_token, {
-        maxAge: 30 * 24 * 60 * 60,
-        path: "/",
-      });
+      setStorageValue(user);
       dispatch(setUserInfo(user));
       setErrorMessage("");
     } catch (err: any) {
