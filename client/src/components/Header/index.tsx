@@ -41,7 +41,7 @@ const Header = ({ solid }: HeaderI) => {
                 className={styles.user_avatar}
                 sx={{ bgcolor: deepOrange[500] }}
               >
-                N
+                {userInfo.name.slice(0, 1)}
               </Avatar>
             </div>
           ) : (

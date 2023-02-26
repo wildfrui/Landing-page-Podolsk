@@ -18,13 +18,14 @@ export class PostService {
     private postRepository: Repository<PostEntity>, // private readonly filesService: FilesService,
   ) {}
 
-  async createPost(createPostDto: CreatePostDto) {
+  async createPost(userId: number, createPostDto: CreatePostDto) {
     // const filename = await this.filesService.createFile(image);
     const post = await this.postRepository.save({
       postTitle: createPostDto.postTitle,
       postDescription: createPostDto.postDescription,
       body: createPostDto.body,
       category: createPostDto.category,
+      author: { id: userId },
     });
     console.log(post);
     return post;

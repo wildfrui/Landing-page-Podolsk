@@ -20,7 +20,7 @@
   align-items: center;
 }
 .user_avatar {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 @media (max-width: 600px) {

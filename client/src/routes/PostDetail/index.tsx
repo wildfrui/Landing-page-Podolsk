@@ -7,6 +7,8 @@ import MainLayout from "layouts/MainLayout";
 import MainSection from "components/MainSection";
 import { changeDateFormatForTitle } from "utils";
 import styles from "./PostDetail.module.css";
+import { Avatar } from "@mui/material";
+import { deepOrange } from "@mui/material/colors";
 
 type Props = {};
 
@@ -17,7 +19,7 @@ const PostDetail = (props: Props) => {
   useEffect(() => {
     const getPost = async () => {
       const post = await xhrGetOnePost(Number(postId));
-      console.log(post.body);
+      console.log(post);
       setPost(post);
     };
     try {
@@ -45,7 +47,13 @@ const PostDetail = (props: Props) => {
                 <p className={styles.published}>
                   Дата публикации {changeDateFormatForTitle(post.createdAt)}
                 </p>
-                <p className={styles.published}>Время чтения: 5 минут</p>
+                <p className={styles.author}>{post.author?.name}</p>
+                <Avatar
+                  className={styles.user_avatar}
+                  sx={{ bgcolor: deepOrange[500] }}
+                >
+                  {post.author?.name.slice(0, 1)}
+                </Avatar>
               </div>
             </div>
             <div className={styles.article}>

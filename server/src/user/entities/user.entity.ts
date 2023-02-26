@@ -1,9 +1,11 @@
-import { RoleEntity } from './../../role/entities/role.entity';
+import { PostEntity } from 'src/post/entities/post.entity';
+import { RoleEntity } from 'src/role/entities/role.entity';
 import {
   Column,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 

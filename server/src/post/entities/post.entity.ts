@@ -1,10 +1,12 @@
-import { Options } from '@nestjs/common';
+import { UserEntity } from './../../user/entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  ManyToMany,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity('posts')
@@ -12,6 +14,9 @@ export class PostEntity {
   @ApiProperty({ example: '1', description: 'Уникальный идентификатор статьи' })
   @PrimaryGeneratedColumn()
   id: number;
+
+  @ManyToOne(() => UserEntity, { cascade: true, eager: true })
+  author: UserEntity;
 
   @ApiProperty({
     example: 'Жемчужина Подмосковья',

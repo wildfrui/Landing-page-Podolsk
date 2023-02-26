@@ -1,3 +1,4 @@
+import { UserEntity } from 'src/user/entities/user.entity';
 import { PageDto } from './dto/post-page.dto';
 import { SearchPostDto } from './dto/search-post.dto';
 import { PostEntity } from './entities/post.entity';
@@ -11,6 +12,8 @@ import {
   Delete,
   UploadedFile,
   UseInterceptors,
+  UseGuards,
+  Request,
   Query,
 } from '@nestjs/common';
 import { PostService } from './post.service';
@@ -19,21 +22,25 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PageOptionsDto } from './dto/post-page-options.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { User } from 'src/decorators/user.decorator';
 
 @ApiTags('post-controller')
 @Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @ApiOperation({ summary: 'Cоздание поста' })
-  @ApiResponse({ status: 200, type: PostEntity })
+  // @ApiOperation({ summary: 'Cоздание поста' })
+  // @ApiResponse({ status: 200, type: PostEntity })
   // @UseInterceptors(FileInterceptor('image'))
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(
+    @User() user: UserEntity,
     @Body() createPostDto: CreatePostDto,
     // @UploadedFile() image: Express.Multer.File,
   ) {
-    return this.postService.createPost(createPostDto);
+    return this.postService.createPost(user.id, createPostDto);
   }
 
   // @ApiOperation({ summary: 'Получить все посты' })
