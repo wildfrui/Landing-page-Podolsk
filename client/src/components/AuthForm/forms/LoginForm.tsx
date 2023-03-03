@@ -34,7 +34,6 @@ const LoginForm = () => {
     console.log(dto);
     try {
       const user = await xhrLoginUser(dto);
-      console.log(user);
       setStorageValue(user);
       dispatch(setUserInfo(user));
       setErrorMessage("");

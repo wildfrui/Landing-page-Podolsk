@@ -9,13 +9,22 @@ import styles from "./Forms.module.css";
 import FormField from "components/FormField";
 import { xhrRegisterUser } from "api/userApi";
 import { CreateUserDto } from "interfaces/CreateUserDto";
+import { setUserInfo } from "actions/authActions";
+import { useLocalStorage } from "hooks";
+import { UserResponse } from "types/UserResponse";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
+  const { setStorageValue } = useLocalStorage<UserResponse | null>(
+    "userInfo",
+    null
+  );
   const [errorMessage, setErrorMessage] = useState("");
   const registerForm = useForm<CreateUserDto>({
     mode: "onSubmit",
     resolver: yupResolver(registerValidation),
   });
+  const dispatch = useDispatch();
 
   const {
     handleSubmit,
@@ -26,11 +35,8 @@ const RegisterForm = () => {
     console.log(dto);
     try {
       const user = await xhrRegisterUser(dto);
-      console.log(user);
-      setCookie(null, "authToken", user.access_token, {
-        maxAge: 30 * 24 * 60 * 60,
-        path: "/",
-      });
+      setStorageValue(user);
+      dispatch(setUserInfo(user));
       setErrorMessage("");
     } catch (err: any) {
       console.warn(err);

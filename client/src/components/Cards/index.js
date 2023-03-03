@@ -22,7 +22,6 @@ const Cards = ({ category }) => {
         page,
         category,
       });
-      console.log(data, meta);
 
       setPosts(data);
       dispatch(setMeta(meta));
