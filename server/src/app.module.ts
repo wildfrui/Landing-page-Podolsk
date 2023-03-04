@@ -1,3 +1,4 @@
+import { LocalFileEntity } from './files/entities/localFile.entity';
 import { UserEntity } from './user/entities/user.entity';
 import { PostEntity } from './post/entities/post.entity';
 import { Module } from '@nestjs/common';
@@ -10,6 +11,9 @@ import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
 import { RoleEntity } from './role/entities/role.entity';
 import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -23,8 +27,14 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [PostEntity, UserEntity, RoleEntity],
+      entities: [PostEntity, UserEntity, RoleEntity, LocalFileEntity],
       synchronize: true,
+    }),
+    MulterModule.register({
+      dest: './static',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, 'static'),
     }),
     PostModule,
     FilesModule,

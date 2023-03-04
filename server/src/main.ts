@@ -2,6 +2,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { urlencoded, json } from 'express';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 5000;
@@ -30,6 +31,8 @@ async function bootstrap() {
       'X-Forwarded-For',
     ],
   });
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   await app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }

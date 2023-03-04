@@ -1,3 +1,4 @@
+import { FilesService } from 'src/files/files.service';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { PageDto } from './dto/post-page.dto';
 import { SearchPostDto } from './dto/search-post.dto';
@@ -23,12 +24,16 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PageOptionsDto } from './dto/post-page-options.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { User } from 'src/decorators/user.decorator';
+import { User } from 'src/config/decorators/user.decorator';
+import { diskStorage } from 'multer';
 
 @ApiTags('post-controller')
 @Controller('posts')
 export class PostController {
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly fileService: FilesService,
+  ) {}
 
   // @ApiOperation({ summary: 'Cоздание поста' })
   // @ApiResponse({ status: 200, type: PostEntity })
@@ -49,6 +54,12 @@ export class PostController {
   // getAll() {
   //   return this.postService.getAllPosts();
   // }
+
+  @Post('/image')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadImageEditor(@UploadedFile() file: Express.Multer.File) {
+    return this.fileService.createFile(file);
+  }
 
   @Get()
   async getWithPaginate(

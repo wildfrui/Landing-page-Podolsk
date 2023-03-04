@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import classnames from "classnames";
 import EditorJS, { OutputBlockData, OutputData } from "@editorjs/editorjs";
-// import ImageTool from "@editorjs/image";
+import ImageTool from "@editorjs/image";
 import styles from "./Editor.module.css";
 
-interface EditorI {
-  onChange: (blocks: OutputData["blocks"]) => void;
-}
+// interface EditorI {
+//   onChange: (blocks: OutputData["blocks"]) => void;
+// }
 
-const Editor = ({ onChange }: EditorI) => {
+const Editor = ({ onChange }) => {
   useEffect(() => {
     const editor = new EditorJS({
       holder: "editor",
@@ -18,16 +18,17 @@ const Editor = ({ onChange }: EditorI) => {
         const { blocks } = await editor.save();
         onChange(blocks);
       },
-      // tools: {
-      //   image: {
-      //     class: ImageTool,
-      //     config: {
-      //       endpoints: {
-      //         byFile: "local",
-      //       },
-      //     },
-      //   },
-      // },
+      tools: {
+        image: {
+          class: ImageTool,
+          config: {
+            endpoints: {
+              byFile: "http://localhost:5000/posts/image",
+            },
+            field: "file",
+          },
+        },
+      },
     });
     return () => {
       editor.isReady
