@@ -53,6 +53,9 @@ export class PostEntity {
   @Column({ type: 'integer', default: 0 })
   views: number;
 
+  @Column()
+  cover: string;
+
   @ApiProperty({
     example: 'Дата',
     description: 'Дата создания поста',

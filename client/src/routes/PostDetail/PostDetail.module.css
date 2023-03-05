@@ -60,7 +60,7 @@
 
 .article {
   font-family: Roboto;
-  margin-top: 40px;
+  margin-top: 20px;
   min-height: auto;
   height: fit-content;
   padding: 0 50px;
@@ -69,4 +69,17 @@
 
 .paragraph {
   max-width: 100%;
+}
+
+.img {
+  max-width: 100%;
+  text-align: center;
+}
+.img img {
+  max-width: 80%;
+}
+
+.caption {
+  font-weight: bold;
+  margin: 10px 0 30px;
 }

@@ -51,6 +51,7 @@ const PostDetail = (props: Props) => {
                 <Avatar
                   className={styles.user_avatar}
                   sx={{ bgcolor: deepOrange[500] }}
+                  src="http://localhost:5000/b2b43120-009f-4776-bbf1-4fe8f2658e00.jpg"
                 >
                   {post.author?.name.slice(0, 1)}
                 </Avatar>
@@ -58,10 +59,17 @@ const PostDetail = (props: Props) => {
             </div>
             <div className={styles.article}>
               {post?.body?.map((obj) => (
-                <p
-                  className={styles.paragraph}
-                  dangerouslySetInnerHTML={{ __html: obj.data.text }}
-                ></p>
+                <>
+                  {obj.type === "image" && (
+                    <div className={styles.img}>
+                      <img src={obj.data.file.url} alt={obj.data.caption} />
+                      {obj.data.caption && (
+                        <p className={styles.caption}>{obj.data.caption}</p>
+                      )}
+                    </div>
+                  )}
+                  {obj.type === "paragraph" && <p>{obj.data.text}</p>}
+                </>
               ))}
             </div>
           </div>

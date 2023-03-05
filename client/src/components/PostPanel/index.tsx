@@ -15,6 +15,7 @@ const PostPanel = () => {
         })}
       </ul>
       <h3 className={classnames(styles.title)}>Выбор обложки</h3>
+      <input type="file" />
     </div>
   );
 };

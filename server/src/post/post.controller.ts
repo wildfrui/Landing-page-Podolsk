@@ -55,10 +55,15 @@ export class PostController {
   //   return this.postService.getAllPosts();
   // }
 
+  @Post('/cover')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadPostCover(@UploadedFile() file: Express.Multer.File) {
+    return this.fileService.createFile(file, 'covers');
+  }
   @Post('/image')
   @UseInterceptors(FileInterceptor('file'))
   uploadImageEditor(@UploadedFile() file: Express.Multer.File) {
-    return this.fileService.createFile(file);
+    return this.fileService.createFile(file, 'images');
   }
 
   @Get()

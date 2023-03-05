@@ -14,18 +14,20 @@ export class FilesService {
     private fileRepository: Repository<LocalFileEntity>,
   ) {}
 
-  async createFile(file) {
+  async createFile(file, type: string) {
     console.log(file);
     try {
       const fileName = uuid.v4() + '.jpg';
-      const filePath = path.resolve(__dirname, '..', 'static');
+      const shortPath = 'static/' + type;
+      const filePath = path.resolve(__dirname, '..', shortPath);
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, { recursive: true });
       }
       fs.writeFileSync(path.join(filePath, fileName), file.buffer);
+      const finalPath = type + '/' + fileName;
       const fileData = await this.saveLocalFileData({
         filename: fileName,
-        path: filePath,
+        path: finalPath,
         mimetype: file.mimetype,
       });
       // console.log(fileData);
@@ -48,7 +50,7 @@ export class FilesService {
     return {
       success: 1,
       file: {
-        url: `http://localhost:5000/${fileData.filename}`,
+        url: `http://localhost:5000/${fileData.path}`,
       },
       meta: { ...newFile },
     };
