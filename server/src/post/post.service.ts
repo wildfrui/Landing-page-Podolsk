@@ -15,11 +15,11 @@ import { PageMetaDto } from './dto/post-page-meta.dto';
 export class PostService {
   constructor(
     @InjectRepository(PostEntity)
-    private postRepository: Repository<PostEntity>, // private readonly filesService: FilesService,
+    private postRepository: Repository<PostEntity>,
+    private fileService: FilesService, // private readonly filesService: FilesService,
   ) {}
 
   async createPost(userId: number, createPostDto: CreatePostDto) {
-    // const filename = await this.filesService.createFile(image);
     const post = await this.postRepository.save({
       postTitle: createPostDto.postTitle,
       postDescription: createPostDto.postDescription,
@@ -27,7 +27,6 @@ export class PostService {
       category: createPostDto.category,
       author: { id: userId },
     });
-    console.log(post);
     return post;
   }
 

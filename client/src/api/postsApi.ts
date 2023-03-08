@@ -35,7 +35,8 @@ export const xhrCreatePost = async (
 ): Promise<PostResponse> => {
   const { data } = await instance.post<CreatePostDto, { data: PostResponse }>(
     "/posts",
-    dto
+    dto,
+    
   );
   return data;
 };

@@ -37,14 +37,10 @@ export class PostController {
 
   // @ApiOperation({ summary: 'Cоздание поста' })
   // @ApiResponse({ status: 200, type: PostEntity })
-  // @UseInterceptors(FileInterceptor('image'))
+
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(
-    @User() user: UserEntity,
-    @Body() createPostDto: CreatePostDto,
-    // @UploadedFile() image: Express.Multer.File,
-  ) {
+  createPost(@User() user: UserEntity, @Body() createPostDto: CreatePostDto) {
     return this.postService.createPost(user.id, createPostDto);
   }
 
@@ -60,6 +56,7 @@ export class PostController {
   uploadPostCover(@UploadedFile() file: Express.Multer.File) {
     return this.fileService.createFile(file, 'covers');
   }
+
   @Post('/image')
   @UseInterceptors(FileInterceptor('file'))
   uploadImageEditor(@UploadedFile() file: Express.Multer.File) {

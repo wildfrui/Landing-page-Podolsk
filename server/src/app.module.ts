@@ -35,6 +35,7 @@ import { MulterModule } from '@nestjs/platform-express';
     }),
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, 'static'),
+      serveStaticOptions: { index: false },
     }),
     PostModule,
     FilesModule,

@@ -9,11 +9,11 @@ export class CreatePostDto {
   })
   readonly postTitle: string;
 
-  @IsString()
-  @ApiProperty({
-    example: 'Гид по самому красивому месту Подмосковья',
-    description: 'Краткое описание статьи для превью',
-  })
+  // @IsString()
+  // @ApiProperty({
+  //   example: 'Гид по самому красивому месту Подмосковья',
+  //   description: 'Краткое описание статьи для превью',
+  // })
   readonly postDescription: string;
 
   @IsArray()

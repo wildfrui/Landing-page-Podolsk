@@ -38,17 +38,14 @@ export class UserService {
 
   async findOneUser(id: number) {
     const user = await this.userRepository.findOneBy({ id });
-    console.log(user);
     return user;
   }
 
   async getUserByEmail(email: string) {
-    console.log(email);
     const user = await this.userRepository.findOne({
       where: { email: email },
       relations: { roles: true },
     });
-    console.log(user);
     return user;
   }
 
@@ -59,7 +56,6 @@ export class UserService {
     });
     const role = await this.roleService.findByValue(addRoleDto.value);
     if (user && role) {
-      console.log(user);
       user.roles.push(role);
       await this.userRepository.save(user);
       return addRoleDto;

@@ -4,10 +4,12 @@ import Editor from "../Editor";
 import styles from "./PostForm.module.css";
 import { OutputBlockData, OutputData } from "@editorjs/editorjs";
 import { xhrCreatePost } from "api/postsApi";
+import { useSelector } from "react-redux";
 
 const PostForm = () => {
   const [title, setTitle] = useState("");
   const [blocks, setBlocks] = useState<OutputBlockData<string, any>[]>([]);
+  const image = useSelector((state: any) => state.postState.chosenImage);
 
   const onAddPost = async () => {
     try {
@@ -22,7 +24,7 @@ const PostForm = () => {
       console.warn(e);
     }
   };
-
+  console.log(title);
   const onChangeBlocks = (arr: OutputData["blocks"]) => {
     setBlocks(arr);
   };
